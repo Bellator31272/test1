@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<link rel="stylesheet" type="text/css" href="/resources/css/default.css" />
+<script type="text/javascript" src="/resources/js/common.js"></script>
+
+
+<%--
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		
+		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/dist/css/bootstrap-theme.min.css" />		
+		
+		<link rel="shortcut icon" href="/resources/image/icon.png" />
+		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		
+		<!--IE8이하 브라우저에서 HTML5를 인식하기 위해서는 아래의 패스필터를 적용하면 된다.--> 
+		<!--[if lt IE 9]>
+		<script src="../js/html5shiv.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="/resources/dist/js/bootstrap.min.js"></script>
+<!-- 		<script type="text/javascript" src="/resources/dist/js/bootstrap.js"></script> -->
+		<script type="text/javascript" src="/resources/js/jquery-3.7.0.min.js"></script>
+
+<!-- 		<title>Insert title here</title> -->
+ --%>

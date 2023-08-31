@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.admin.login.dao.AdminLoginDAO">
+
+	<!-- VO 값과 테이블 컬럼이름이 다를 경우
+		<resultMap type="adminLogin" id="adminLoginMap">
+			<id column="a_id" property="adminId" />
+			// id = 기본키 설정
+			<result column="a_name" property="adminName" />
+			<result column="a_email" property="adminEmail" />
+		</resultMap>
+	<select id="loginProcess" parameterType="adminLogin" resultMap="adminLoginMap">
+	 -->
+
+	<select id="loginProcess" parameterType="adminLogin" resultType="adminLogin">
+		select a_id, a_name, a_phone, a_email, a_date from spring_admin
+		<!-- select a_id adminId, a_name adminName, a_phone adminPhone, a_email adminEmail, 
+		a_date date from spring_admin  별칭 주면 됨 -->
+		where a_id=#{a_id} and a_pwd=#{a_pwd}
+		<!-- where a_id=#{adminId} and a_pwd=#{adminPwd} -->
+	</select>
+
+</mapper>

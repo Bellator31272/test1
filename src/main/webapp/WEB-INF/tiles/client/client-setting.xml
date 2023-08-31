@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+  
+<tiles-definitions>
+	
+	<definition name="intro" template="/WEB-INF/views/template/mainLayout.jsp">
+		<put-attribute name="title" value="intro" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
+	
+	<definition name="content" template="/WEB-INF/views/template/contentLayout.jsp">
+		<put-attribute name="title" value="content" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
+
+	<definition name="client/board/*" extends="content">
+		<put-attribute name="title" value="게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/client/board/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin/*" extends="content">
+		<put-attribute name="title" value="관리자" />
+		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp" />
+	</definition>
+	
+	<definition name="client/movie/*" extends="content">
+		<put-attribute name="title" value="Movie" />
+		<put-attribute name="body" value="/WEB-INF/views/client/movie/{1}.jsp" />
+	</definition>
+	
+	<definition name="data/*" extends="content">
+		<put-attribute name="title" value="Open_API" />
+		<put-attribute name="body" value="/WEB-INF/views/data/{1}.jsp" />
+	</definition>
+	
+</tiles-definitions>

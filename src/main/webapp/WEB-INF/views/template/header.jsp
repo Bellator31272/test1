@@ -37,7 +37,7 @@
           <ul class="nav navbar-nav">
             <li id="home"  ><a href="/">Home</a></li>
             <li  <c:if test="${fn:containsIgnoreCase(clientUri, 'board') }" > class="active" </c:if> ><a href="/board/boardList">게시판</a></li>
-            <li id="admin" <c:if test="${fn:containsIgnoreCase(clientUri, '예비') }" > class="active" </c:if>><a href="#">예비</a></li>
+            <li id="admin" <c:if test="${fn:containsIgnoreCase(clientUri, '#') }" > class="active" </c:if>><a href="#">#</a></li>
 <!--             <li><a href="#contact">Contact</a></li> -->
             <li class="dropdown <c:if test="${fn:containsIgnoreCase(clientUri, 'data') }" > active </c:if>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">공공데이터 <span class="caret"></span></a>
@@ -45,8 +45,8 @@
                 <li class="dropdown-header">관광명소</li>
                 <li><a href="/data/chungnamView">충남</a></li>
                 <li class="divider"></li>
-                <li class="dropdown-header">#</li>
-                <li><a href="#">#</a></li>
+                <li class="dropdown-header">대전</li>
+                <li><a href="/data/animalDaejeonView">유기동물</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">#</li>
                 <li><a href="#">#</a></li>

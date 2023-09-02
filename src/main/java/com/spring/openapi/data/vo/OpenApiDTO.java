@@ -1,4 +1,4 @@
-package com.spring.openai.data.vo;
+package com.spring.openapi.data.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

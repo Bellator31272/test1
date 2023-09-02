@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.openapi.data.service.DataService;
+import com.spring.openapi.data.vo.AnimalDaejeonDTO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -46,4 +47,26 @@ public class DataController {
 		StringBuffer sb = dataService.chungnamDetail(mng_no);;
 		return sb.toString();
 	}
+	
+	@GetMapping(value="/animalDaejeonView")
+	public String animalDaejeonView() {
+		log.info("유기동물 페이지");
+		return "data/animalDaejeonView";
+	}
+	
+	@GetMapping(value="/animalDaejeonList", produces="application/xml; charset=UTF-8")
+	@ResponseBody
+	public String animalDaejeonList(AnimalDaejeonDTO dto) throws Exception {
+		log.info("대전 유기고양이 리스트");
+		StringBuffer sb = dataService.animalDaejeonList(dto);;
+		return sb.toString();
+	}
+	
+	@GetMapping(value="/animalDaejeonDetailView")
+	public String animalDaejeonDetailView(String animalSeq) {
+		log.info("충남 관광 명소 상세 페에지 화면");
+		return "redirect:https://www.daejeon.go.kr/ani/AniStrayAnimalView.do?animalSeq="+animalSeq;
+	}
+	
+	
 }

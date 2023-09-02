@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.spring.openai.data.vo.OpenApiDTO;
+import com.spring.openapi.data.vo.OpenApiDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

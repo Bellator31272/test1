@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.reply.dao.ReplyDAO">
+
+	<select id="replyList" parameterType="reply" resultType="reply">
+		select r_num, b_num, r_name, r_content, to_char(r_date, 'YY-MM-DD HH24:MI:SS') as r_date
+		from spring_reply where b_num = #{b_num}
+		order by r_num asc
+	</select> 
+
+	<insert id="replyInsert" parameterType="reply">
+		insert into spring_reply(r_num, b_num, r_name, r_content, r_pwd)
+		values(spring_reply_seq.nextval, #{b_num}, #{r_name}, #{r_content}, #{r_pwd})
+	</insert>
+
+	<select id="pwdConfirm" parameterType="reply" resultType="int">
+		select nvl((
+			select 1 from spring_reply where
+			r_num = #{r_num} and r_pwd = #{r_pwd}
+		), 0) as state from daul
+	</select>
+
+	<update id="replyUpdate" parameterType="reply">
+		update spring_reply set 
+			r_content = #{r_content}
+			, r_date = sysdate
+			<if test="r_pwd != ''">
+				, r_pwd = #{r_pwd}
+			</if>
+		where r_num = #{r_num}
+	</update>
+	
+	<delete id="replyDelete" parameterType="reply">
+		delete from spring_reply where r_num = #{r_num}
+	</delete>
+	
+	<delete id="replyChoiceDelete" parameterType="reply">
+		delete from spring_reply where b_num = #{b_num}
+	</delete>
+	
+	<select id="replyCnt" parameterType="int" resultType="int">
+		select count(r_num) from spring_reply where b_num = #{b_num}
+	</select>
+	
+	
+	
+</mapper>

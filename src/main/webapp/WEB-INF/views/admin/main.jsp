@@ -36,8 +36,10 @@
 		<script type="text/javascript">
 			$(function(){
 				let errorMsg = "${errorMsg}";
+				let asdf = "${asdf}";
 				if(errorMsg !="") {
 					alert(errorMsg);
+					alert(asdf);
 					errorMsg="";
 				}
 				$("#loginBtn").click(function(){

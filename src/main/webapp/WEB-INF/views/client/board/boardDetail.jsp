@@ -23,11 +23,28 @@ $(function(){
 		btnChk = 1;
 	})
 	$("#deleteBtn").click(function(){
-		$("#pwdChk").css("visibility", "visible");
-		$("#msg").text("비밀번호 입력하세요").css("color", "#000099");
-		$("#b_pwd").focus();
-		btnChk = 2;
-	})
+		$.ajax({
+			url:"/board/replyCnt",
+			type:"post",
+			data:"b_num="+$("#b_num").val(),
+			dataType:"text",
+			error:function(){
+				alert("시스템 오류");
+			},
+			success:function(resultData){
+				if(resultData==="0"){	//댓글이 없는 경우
+					$("#pwdChk").css("visibility", "visible");
+			 		$("#msg").text("비밀번호 입력하세요").css("color", "#000099");
+			 		$("#b_pwd").focus();
+			 		btnChk = 2;
+				}else {
+					alert("댓글 존재시 게시물 삭제할 수 없습니다. \n댓글 삭제 후 다시 확인해 주세요.")
+				}
+			}
+		});
+	});
+	
+	
 	
 	$("#pwdchkBtn").click(function(){
 		if(!formCheck("#b_pwd", "#msg", "비밀번호")) {return;}
@@ -47,18 +64,23 @@ $(function(){
 					} else{
 						$("#msg").text("");
 						if(btnChk==1) {	//수정버튼 1
-							$("#f_pwd").attr("action", "/board/updateForm");
-							$("#f_pwd").attr("method", "post");
-							$("#f_pwd").submit();
+							actionProcess("get", "/board/updateForm");
 						} else if(btnChk==2) {
 							if(confirm("삭제확인")){
-								$("#f_pwd").attr("action", "/board/boardDelete");
-								$("#f_pwd").submit();
+								actionProcess("post", "/board/boardDelete");
 							}
 						}
 					}
 				}
 			});
+		}
+		function actionProcess(method, goUrl) {
+			method==="get" ? $("#b_file").remove() : "";
+			$("#f_data").attr({
+				"method":method,
+				"action":goUrl
+			});
+			$("#f_data").submit();
 		}
 	})
 	
@@ -68,11 +90,21 @@ $(function(){
 	})
 })
 </script>
-
+<style>
+.file{
+	width:100%;
+}
+.contentContainer{margin-bottom:60px;}
+</style>
 <title>글 내용</title>
 	</head>
 	<body>
 		<div class="container contentContainer">
+		
+		<form name="f_data" id="f_data">
+			<input type="hidden" name="b_num" value="${detail.b_num }" />
+			<input type="hidden" name="b_file" id="b_file" value="${detail.b_file }" />
+		</form>
 			
 			<div id="borderPwdBut" class="row text-center"><!-- 비밀번호 확인 버튼 -->
 				<div id="pwdChk" class="authArea col-md-8 text-left">
@@ -112,14 +144,16 @@ $(function(){
 						<tr class="table-tr-height">
 							<td class="col-md-4">글내용</td>
 							<td colspan="3" class="col-md-8 text-left">
+								<c:if test="${not empty detail.b_file }">
+									<a href="/uploadStorage/board/${detail.b_file }" target="_blank"><img src="/uploadStorage/board/${detail.b_file }" class="file"/></a> <br />
+								</c:if>
 								${detail.b_content }
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				
-				
 			</div>
+			<%@ include file="reply.jsp" %>
 		</div>
 	</body>
 </html>

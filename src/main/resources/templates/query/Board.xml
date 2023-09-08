@@ -14,34 +14,13 @@
 	</sql>
 
 	<select id="boardList" resultType="board" parameterType="board">
-<!-- 	select b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, readcnt 
-		from spring_board 
-		order by b_num desc -->
-
-<!-- 		select b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, readcnt -->
-<!-- 		from spring_board -->
-<!-- 		<where> -->
-<!-- 			<if test="search=='b_title'"> -->
-<!-- 				<![CDATA[ b_title like '%'||#{keyword}||'%']]> -->
-<!-- 			</if> -->
-<!-- 			<if test="search=='b_name'"> -->
-<!-- 				<![CDATA[ b_name like '%'||#{keyword}||'%']]> -->
-<!-- 			</if> -->
-<!-- 			<if test="search=='b_content'"> -->
-<!-- 				<![CDATA[ b_content like '%'||#{keyword}||'%']]> -->
-<!-- 			</if> -->
-<!-- 		</where> -->
-<!-- 			order by b_num desc -->
-	
-<!-- 	<insert id="boardInsert" parameterType="board"> -->
-<!-- 		insert into spring_board(b_num, b_name, b_title, b_content, b_pwd) -->
-<!-- 		values(spring_board_seq.nextval, #{b_name}, #{b_title}, #{b_content}, #{b_pwd}) -->
-<!-- 	</insert> -->
+		
 		<![CDATA[
-		select b_num, b_name, b_title, to_char(b_date,'YYYY-MM-DD')as b_date, readcnt 
+		select b_num, b_name, b_title, to_char(b_date,'YY-MM-DD')as b_date, readcnt, b_file,
+				(select count(r_num) from spring_reply where b_num = boardlist.b_num) as r_cnt
 		    from(
 		        select /*+ index_desc(spring_board spring_board_pk) */ 
-		            rownum as rnum, b_num, b_name, b_title, b_date, readcnt
+		            rownum as rnum, b_num, b_name, b_title, b_date, readcnt, b_file
 		        from spring_board where]]>
 		    <trim prefix="(" suffix=") and " prefixOverrides="and">
 				<include refid="boardSearch"></include>
@@ -51,6 +30,7 @@
 			) boardlist
 		where rnum > (#{pageNum}-1)*#{amount}
 		]]>
+		
 	</select>
 	
 	<select id="boardListCnt" parameterType="board" resultType="int">
@@ -65,12 +45,12 @@
 			select spring_board_seq.nextval from dual
 		</selectKey>
 		
-		insert into spring_board(b_num, b_name, b_title, b_content, b_pwd)
-		values(#{b_num}, #{b_name}, #{b_title}, #{b_content}, #{b_pwd})
+		insert into spring_board(b_num, b_name, b_title, b_content, b_pwd, b_file)
+		values(#{b_num}, #{b_name}, #{b_title}, #{b_content}, #{b_pwd}, #{b_file})
 	</insert>
 	
 	<select id="boardDetail" resultType="board" parameterType="int">
-		select b_num, b_name, b_title, b_content, to_char(b_date, 'YYYY-MM-DD HH24:MI:SS') as b_date, readcnt
+		select b_num, b_name, b_title, b_content, to_char(b_date, 'YYYY-MM-DD HH24:MI:SS') as b_date, readcnt, b_file
 		from spring_board where b_num=#{b_num}
 	</select>
 	
@@ -94,6 +74,9 @@
 	 	b_date = sysdate 
 	 	<if test='b_pwd != null and b_pwd !=""'>
 	 		, b_pwd=#{b_pwd} 
+	 	</if>
+	 	<if test='b_file != null and b_file !=""'>
+	 		, b_file=#{b_file} 
 	 	</if>
 	 	where b_num=#{b_num}
 	</update>

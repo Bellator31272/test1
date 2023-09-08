@@ -94,5 +94,21 @@ public class DataServiceImpl implements DataService {
 		return result;
 	}
 
+	@Override
+	public StringBuffer daejeonTourList() throws Exception {
+		String key = "ABUw3RKqYkSJZtG2sVRYGdVf99pxC%2F30z0URGJtTFkWcNWMa0ItZB06WXD%2BoG8oYEbfy8h4LvhZr26tUrqEWSQ%3D%3D";
+		String pageNo = "1";				//페이지
+		String numOfRows = "20";		//페이지당 아이템수
+		StringBuffer site = new StringBuffer("https://apis.data.go.kr/6300000/openapi2022/tourspot/gettourspot");
+		site.append("?"+URLEncoder.encode("serviceKey", "UTF-8")+"="+key);
+		site.append("&"+URLEncoder.encode("pageNo", "UTF-8")+"="+URLEncoder.encode(pageNo, "UTF-8"));
+		site.append("&"+URLEncoder.encode("numOfRows", "UTF-8")+"="+URLEncoder.encode(numOfRows, "UTF-8"));
+		
+		
+		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET", null, null);
+		StringBuffer result = URLConnectUtil.openAPIData(openApi);
+		return result;
+	}
+
 
 }

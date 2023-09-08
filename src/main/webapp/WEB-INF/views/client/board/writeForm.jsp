@@ -19,14 +19,21 @@
 			else if(!chkData("#b_title", "제목을")) return;
 			else if(!chkData("#b_content", "내용을")) return;
 			else if(!chkData("#b_pwd", "비밀번호를")) return;
+			
 			else{
+				if($("#file").val()!="") {
+					if(!chkFile($("#file"))) return;
+				}
+
+// 				enctype 속성의 기본 값은 "application/x-www-form-urlcencoded". POST방식 폼 전송에 기본 값으로 사용
 				$("#writeForm").attr({
 					"method":"post",
+					"enctype":"multipart/form-data", 
 					"action":"/board/boardInsert"
 				});
 				$("#writeForm").submit();
 			}
-		})
+		});
 		
 	})
 </script>
@@ -35,7 +42,6 @@
 	</head>
 	<body>
 		<div class="container">
-<!-- 			<div class="contentTit page-header"><h3 class="text-center">게시판 입력화면</h3></div> -->
 			
 			<div class="text-center">
 				<form class="form-horizontal" id="writeForm">
@@ -64,6 +70,12 @@
 								<td>비밀번호</td>
 								<td class="text-left">
 									<input type="password" class="form-control" id="b_pwd" name="b_pwd">
+								</td>
+							</tr>
+							<tr>
+								<td>파일첨부</td>
+								<td class="text-left">
+									<input type="file" id="file" name="file">
 								</td>
 							</tr>
 						</tbody>

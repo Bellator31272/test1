@@ -30,7 +30,7 @@ public class MovieController {
 		return "index";
 	}
 	
-	@PostMapping("/movieDetail/{id}")
+	@GetMapping("/movieDetail/{id}")
 	public String getDetail(@PathVariable String id, Model model) {
 		MovieVO movie = movieService.getMovieDetail(id);
 		String overview = movie.getOverview();

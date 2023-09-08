@@ -47,6 +47,7 @@
                 <li class="divider"></li>
                 <li class="dropdown-header">대전</li>
                 <li><a href="/data/animalDaejeonView">유기동물</a></li>
+                <li><a href="/data/daejeonTourView">문화관광</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">#</li>
                 <li><a href="#">#</a></li>

@@ -36,7 +36,7 @@
 
 	$(function() {
 		$(".contentLayout .page-header h1").html("대전 - 유기동물 공고");
-		
+		data();
 		$("#searchCondition, #searchCondition3").on("change", function(){
 			data();
 		})

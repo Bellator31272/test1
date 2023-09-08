@@ -36,11 +36,11 @@
 	$(function(){
 		$('.dropdown-toggle').dropdown();
 		$(".movieDetail").click(function(){
-			let id = $(this).parents("tr").attr("data-num");
+			let id = $(this).attr("data-num");
 			console.log("id :", id);
 			$("#id").val(id);
 			$("#detail").attr({
-				method : "post",
+				method : "get",
 				action : "/movieDetail/"+id
 			})
 			$("#detail").submit();
@@ -88,8 +88,8 @@
 		<h1>Now Playing Movies</h1>
 		<table class="table">
 			<c:forEach var="movie" items="${movies}">
-			<tr data-num="${movie.id}"><td>
-				<img class="movieDetail" src="http://image.tmdb.org/t/p/w400${movie.poster_path }">
+			<tr ><td>
+				<img class="movieDetail" data-num="${movie.id}" src="http://image.tmdb.org/t/p/w400${movie.poster_path }">
 			</td></tr>				
 			</c:forEach>
 		

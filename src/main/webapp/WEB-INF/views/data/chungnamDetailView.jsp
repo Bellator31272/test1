@@ -5,12 +5,13 @@
 <script type="text/javascript">
 		$(function(){
 			$(".contentLayout .page-header h1").html("충남관광 - 상세정보");
-			
 			let mng_no = ${param.mng_no};
+			console.log(mng_no);
 			$.ajax({
-				url : "/data/chungnamDetail",
+// 				url : "/data/chungnamDetail",
+				url : "/data/chungnamDetail/"+mng_no,
 				type : "get",
-				data : "mng_no=" + mng_no,
+// 				data : "mng_no=" + mng_no,
 				dataType : "xml",
 				error : function(xhr, textStatus, errorThrown){
 					alert(textStatus + "(http-" + xhr.status + "/" + errorThrown + ")");

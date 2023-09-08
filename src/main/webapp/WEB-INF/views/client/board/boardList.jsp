@@ -72,6 +72,20 @@
 			$("#f_search").submit();
 	}
 </script>
+<style>
+td{
+display:table-cell;
+  vertical-align:middle;
+}
+.file{
+	width:130px;
+}
+.reply_count{
+	font-size : 80%;
+	color : red;
+}
+
+</style>
 
 <title>게시판 리스트</title>
 
@@ -113,18 +127,29 @@
 						<th class="text-center col-md-2">작성자</th>
 						<th data-value="b_date" class="order col-md-1">작성일</th>
 						<th class="text-center col-md-1">조회수</th>
+						<th class="text-center col-md-1"></th>
 					</tr>
 				</thead>
 				<tbody id="list" class="table-striped" >
 					<c:choose>
-						<c:when test="${not empty boardList}" >
+						<c:when test="${not empty boardList}"  >
 							<c:forEach var="board" items="${boardList}" varStatus="status"> 
 								<tr class="text-center" data-num="${board.b_num}">
  									<td>${board.b_num}</td>
-									<td class="goDetail text-left"> ${board.b_title} </td>
+									<td class="goDetail text-left"> ${board.b_title}
+										<c:if test="${board.r_cnt != 0 }"> <span class="reply_count">[${board.r_cnt }]</span></c:if>
+									</td>
 									<td class="name">${board.b_name}</td>
 									<td class="text-left"> ${board.b_date}</td>
 									<td class="text-center">${board.readcnt}</td>
+									<td>
+										<c:if test="${not empty board.b_file }">
+											<img src="/uploadStorage/board/${board.b_file }" class="file"/>
+										</c:if>
+										<c:if test="${empty board.b_file }">
+											<img src="/resources/image/imagenotfound.png" class="file" />
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</c:when>

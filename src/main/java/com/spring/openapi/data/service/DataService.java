@@ -7,4 +7,5 @@ public interface DataService {
 	public StringBuffer chungnamList() throws Exception;
 	StringBuffer chungnamDetail(String mng_no) throws Exception;
 	StringBuffer animalDaejeonList(AnimalDaejeonDTO dto) throws Exception;
+	StringBuffer daejeonTourList() throws Exception;
 }
